@@ -37,34 +37,14 @@ public class WorldGenerator : MonoBehaviour
         WorldManager.ChunkDimensions = _chunkDimensions;
         WorldManager.WorldDimensionsChunks = _worldDimensions;
 
-<<<<<<< Updated upstream
-=======
         //Reset and initialise relevant data
         WorldSetup();
         float processingTime = (Time.realtimeSinceStartup - startTime);
         Debug.Log("WorldSetuo Time: " + string.Format("{0:0.000}", processingTime) + " seconds");
 
         //Generate elevation map from perlin noise
->>>>>>> Stashed changes
         TerrainData[,] terrainData = new TerrainData[_worldDimensions.x * _chunkDimensions.x, _worldDimensions.z * _chunkDimensions.z];
         NoiseGenerator.GenerateElevationMap(seed, ref terrainData, attributes);
-<<<<<<< Updated upstream
-        Debug.Log("tiles: " + terrainData.GetLength(0) * terrainData.GetLength(1));
-
-        for (int x = 0; x < _worldDimensions.x; x++)
-        {
-            for (int y = 0; y < _worldDimensions.y; y++)
-            {
-                for (int z = 0; z < _worldDimensions.z; z++)
-                {
-                    CreateChunk(x * _chunkDimensions.x, y * _chunkDimensions.y, z * _chunkDimensions.z, terrainData);
-                }
-            }
-        }
-
-        float processingTime = (Time.realtimeSinceStartup - startTime);
-        Debug.Log("WorldGen Time: " + processingTime * 1000f + "ms");
-=======
         processingTime = (Time.realtimeSinceStartup - startTime);
         Debug.Log("ElevationMap Time: " + string.Format("{0:0.000}", processingTime) + " seconds");
 
@@ -77,7 +57,6 @@ public class WorldGenerator : MonoBehaviour
         Pathfinding.UpdatePathfindingGrid();
 
         processingTime = (Time.realtimeSinceStartup - startTime);
->>>>>>> Stashed changes
         Debug.Log("WorldGen Time: " + string.Format("{0:0.000}", processingTime) + " seconds");
     }
 
@@ -92,11 +71,7 @@ public class WorldGenerator : MonoBehaviour
 
         Chunk newChunk = new Chunk();
         WorldManager.WorldChunks.Add(worldPos, newChunk);
-<<<<<<< Updated upstream
-        newChunk.Init(worldPos, new Vector3(x, y, z), blocksMats);
-=======
         newChunk.Init(worldPos, new Vector3(x, y, z), blocksMats, this.transform, seed);
->>>>>>> Stashed changes
         chunkManager.RequestNewChunk(OnChunkRecieved, newChunk, terrainData);
     }
 
@@ -109,8 +84,6 @@ public class WorldGenerator : MonoBehaviour
     {
         chunk.RenderMesh(meshData);
     }
-<<<<<<< Updated upstream
-=======
 
     void WorldSetup()
     {
@@ -134,5 +107,4 @@ public class WorldGenerator : MonoBehaviour
             }
         }
     }
->>>>>>> Stashed changes
 }
